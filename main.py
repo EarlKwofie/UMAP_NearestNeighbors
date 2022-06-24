@@ -8,6 +8,7 @@ import os
 from PIL import Image
 
 
+
 def printData(j_file):
     # file = json.dumps(j_file);
     print(j_file)
@@ -61,11 +62,11 @@ print(getDistance(0, 2))
 def getNearestNeighbors(image_index):
     distances = []
     image_indexes = []
-    for i in range(150):
+    for i in range(len(f_images)):
         distances.append(getDistance(image_index, i))
         image_indexes.append(i)
 
-    for i in range(150):
+    for i in range(len(f_images)):
         base = distances[i]
         base_index = image_indexes[i]
         j = i - 1
