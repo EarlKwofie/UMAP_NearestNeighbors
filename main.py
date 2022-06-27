@@ -5,6 +5,9 @@
 import json
 import math
 import os
+import numpy
+
+import numpy
 from PIL import Image
 
 
@@ -25,10 +28,13 @@ printData(file)
 # simple method to convert json data to array of strings
 f_json = open("umap-e960482e-f0bc-11ec-a9d0-38fc985d69ec.json")
 f_data = json.load(f_json)
+f_data_numpy = numpy.asarray(f_data)
 # for i in f_data:
 # print(i)
 
 # simple method to convert all the images in a file into an array and displays them in order
+# check out the enumerate function within the python library
+
 f_images = []
 for image in os.listdir("./images/"):
     if image.endswith(".jpg"):
@@ -41,6 +47,7 @@ for image in f_images:
 
 
 # way to calculate the distance between 2 image indexes
+
 def getDistance(im_1, im_2):
     image1_x = f_data[im_1][0]
     image1_y = f_data[im_1][1]
@@ -59,6 +66,8 @@ print(getDistance(0, 2))
 
 
 # Returns the 5 closest points on the UMAP to a point of focus on the UMAP
+# Still look into the way that we can use an existing nearest neighbors function - it's probably faster
+
 def getNearestNeighbors(image_index):
     distances = []
     image_indexes = []
@@ -84,6 +93,7 @@ print(getNearestNeighbors(5))
 
 # returns the images that are nearest to a given image index
 # need a method to copy all the images to a folder in order of how close they are to the given image
+
 def displayNeighbors(neighbors):
     print(len(f_images))
     neighbor_image = []
@@ -95,7 +105,9 @@ def displayNeighbors(neighbors):
 
 #displayNeighbors(getNearestNeighbors(5))
 
-# A simple algorithm for the transformation script
+# A simple algorithm for the 'image walk'
+# determines a path between two image indexes by jumping between images
+
 def getTransformation(image_1, image_2):
         im_index = image_1
         transformation = [image_1]
