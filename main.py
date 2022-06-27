@@ -16,15 +16,6 @@ def printData(j_file):
     # file = json.dumps(j_file);
     print(j_file)
 
-
-f = open("test.txt", "w")
-f.write("Hello")
-f = open("test.txt", "r");
-file = f.read()
-f.close()
-
-printData(file)
-
 # simple method to convert json data to array of strings
 f_json = open("umap-e960482e-f0bc-11ec-a9d0-38fc985d69ec.json")
 f_data = json.load(f_json)
@@ -138,3 +129,4 @@ def getTransformation(image_1, image_2):
         displayNeighbors(transformation)
 
 getTransformation(24,70)
+
