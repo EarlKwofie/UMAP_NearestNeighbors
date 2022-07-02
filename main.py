@@ -8,7 +8,10 @@ import os
 import numpy
 
 import numpy
+import cv2
+import numpy as np
 from PIL import Image
+from matplotlib import pyplot as plt
 
 
 
@@ -27,6 +30,7 @@ f_data_numpy = numpy.asarray(f_data)
 # check out the enumerate function within the python library
 
 f_images = []
+f_imagepath = []
 for image in os.listdir("./images/"):
     if image.endswith(".jpg"):
         f_images.append(image)
@@ -34,6 +38,7 @@ for image in os.listdir("./images/"):
 for image in f_images:
     image_file = os.path.basename(image)
     display = Image.open("./images/" + image_file, 'r')
+    f_imagepath.append("./images/" + image_file)
     # display.show()
 
 
@@ -77,7 +82,7 @@ def getNearestNeighbors(image_index):
             distances[j + 1] = base
             image_indexes[j + 1] = base_index
 
-    return image_indexes[1: 5]
+    return image_indexes[0: 6]
 
 
 print(getNearestNeighbors(5))
@@ -102,9 +107,9 @@ def displayNeighbors(neighbors):
 def getTransformation(image_1, image_2):
         im_index = image_1
         transformation = [image_1]
-
+        i = 0
         # still need to make this more efficient, also there is not verification to insure an image isnt selected twice
-        for i in range(4):
+        for i in range(6):
             neighbors = getNearestNeighbors(im_index)
             neighbor_distance = []
             for n in neighbors:
@@ -122,11 +127,52 @@ def getTransformation(image_1, image_2):
                     neighbors[j + 1] = base_index
 
             # also curious about what the sorting is putting first in the list, the closest? or the furthest?
-            im_index = neighbors[0]
-            transformation.append(im_index)
+            im_index = neighbors[1]
+
+            if im_index in transformation:
+                k = 0
+                while im_index in transformation and k < 6:
+                        im_index = neighbors[k]
+                        k+=1
+
+            if im_index in transformation:
+                break
+
+            else:
+                transformation.append(im_index)
 
         transformation.append(image_2)
-        displayNeighbors(transformation)
+        return transformation
+        #displayNeighbors(transformation)
 
-getTransformation(24,70)
+def displayTransformation (neighbors):
+    print(neighbors)
+    images = []
+
+    for n in range(len(neighbors)):
+        image = cv2.imread(f_imagepath[neighbors[n]])
+        images.append(image)
+
+    return images
+
+
+output = displayTransformation(getTransformation(234, 1000))
+
+rows = 1
+columns = len(output)
+
+fig = plt.figure(figsize=(15,15))
+
+index = 0
+for o in output:
+    fig.add_subplot(rows, columns, index + 1)
+    plt.imshow(output[index])
+    plt.axis("off")
+    index = index + 1
+
+plt.waitforbuttonpress()
+
+plt.close(fig)
+
+
 
