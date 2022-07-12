@@ -1,0 +1,24 @@
+Wrote UNOPTIMAL Function for Checking Graph Connectivity
+
+First off function is in o(n^3) runtime, super
+slow. Second of all, it has not yet been
+tested on a smaller adj matrix. Third of all, the
+kneighbors_graph needs a lot of memory allocation
+so we need to convert each type into something
+else first, like a bool.  
+
+Also added json files from Jesses pixplot with
+ metadata
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch joya
+# Changes to be committed:
+#	new file:   connected
+#	new file:   graphConnected.cpp
+#	new file:   graphConnected.py
+#	modified:   main.py
+#	new file:   standardized.json
+#	new file:   standardizedjittered.json
+#
