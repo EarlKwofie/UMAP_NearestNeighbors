@@ -1,3 +1,5 @@
+import numpy as np
+
 def traverse(adjacency_matrix, startNodeNum, visited):
     x= adjacency_matrix.shape
     size = x[0]
@@ -7,11 +9,11 @@ def traverse(adjacency_matrix, startNodeNum, visited):
         if adjacency_matrix[startNodeNum][i] and not visited[i]:
                 traverse(adjacency_matrix, i,visited)
 
-def isConnected(adjacency_matrix,startNodeNum):
+def isConnected(adjacency_matrix):
     x= adjacency_matrix.shape
     size = x[0]
     visited = [False for i in range(0, size)]
-    for i in range(startNodeNum,size):
+    for i in range(0,size):
         for j in range(0, size):
             visited[j] = False
             traverse(adjacency_matrix,i, visited)
@@ -22,3 +24,8 @@ def isConnected(adjacency_matrix,startNodeNum):
         
             print("The Graph is Connected")
             return True
+
+adjM = np.array([[0,0,0,0,0],[0,0,1,1,0], [0,1,0,1,1], [0,1,1,0,1], [0,0,1,1,0]])
+print(adjM)
+
+isConnected(adjM)

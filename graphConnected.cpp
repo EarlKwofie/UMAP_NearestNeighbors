@@ -1,9 +1,9 @@
 #include<iostream>
 #define NODE 5
 using namespace std;
-int graph[NODE][NODE] = {{0, 1, 1, 0, 0},
-{1, 0, 1, 1, 0},
-{1, 1, 0, 1, 1},
+int graph[NODE][NODE] = {{0, 0, 0, 0, 0},
+{0, 0, 1, 1, 0},
+{0, 1, 0, 1, 1},
 {0, 1, 1, 0, 1},
 {0, 0, 1, 1, 0}};
 void traverse(int u, bool visited[]) {
@@ -16,9 +16,9 @@ void traverse(int u, bool visited[]) {
    }
 }
 bool isConnected() {
-   bool *vis; = new bool[NODE];
+   bool *vis = new bool[NODE];
    //for all vertex u as start point, check whether all nodes are visible or not
-   for(int u; u < NODE; u++) {
+   for(int u = 0; u < NODE; u++) {
       for(int i = 0; i<NODE; i++)
          vis[i] = false; //initialize as no node is visited
          traverse(u, vis);

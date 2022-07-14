@@ -42,6 +42,7 @@ f_data = json.load(f_json)
 f_data_numpy = np.array(f_data)
 x= f_data_numpy.shape
 rowsize = x[0]
+print(rowsize)
 
 # # put image files in array
 # # check out the enumerate function within the python library
